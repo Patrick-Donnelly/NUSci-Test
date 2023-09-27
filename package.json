@@ -1,0 +1,20 @@
+{
+  "name": "nusci-test",
+  "version": "1.0.0",
+  "description": "Test of NPM for NUSci website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patrick-Donnelly/NUSci-Test.git"
+  },
+  "author": "Patrick J. Donnelly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Patrick-Donnelly/NUSci-Test/issues"
+  },
+  "homepage": "https://github.com/Patrick-Donnelly/NUSci-Test#readme"
+}
