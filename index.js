@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import path from 'path';
+import route from './pages.route.js';
 
 const app = express();
 
@@ -9,13 +9,8 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve() + '/index.html');
-});
-
-app.get('/page2', (req, res) => {
-    res.sendFile(path.resolve() + '/page2.html');
-});
+app.use('/', route);
+app.use('/page2', route);
 
 const HOSTNAME = '0.0.0.0';
 const PORT = 3000;
