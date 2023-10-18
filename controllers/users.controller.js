@@ -6,4 +6,12 @@ export default class UserController {
         const users = await UserAccessor.getAllUsers();
         res.render('index', {users: users});
     }
+
+    static getLoginPage(req, res) {
+        res.render('login_page', { error: req.cookies.error });
+    }
+
+    static getSignUpPage(req, res) {
+        res.render('sign_up');
+    }
 }
