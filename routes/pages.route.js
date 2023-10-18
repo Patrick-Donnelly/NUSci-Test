@@ -10,8 +10,12 @@ router.route('/css/index.css').get((req, res) => {
     res.sendFile(path.resolve() + '/css/index.css');
 });
 
-router.route('/css/login-page').get(UserController.getLoginPage);
+router.route('/css/style.css').get((req, res) => {
+    res.sendFile(path.resolve() + '/css/style.css');
+});
 
-router.route('/css/sign-up').get(UserController.getSignupPage);
+router.route('/login-page').get(UserController.getLoginPage);
+
+router.route('/sign-up').get(UserController.getSignUpPage);
 
 export default router;
