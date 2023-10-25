@@ -1,5 +1,5 @@
-import User from '../models/user.js';
 import UserAccessor from '../db_accessor/user.accessor.js';
+import bcrypt from 'bcrypt';
 
 export default class UserController {
     static async getAllUsers(req, res) {
@@ -13,5 +13,15 @@ export default class UserController {
 
     static getSignUpPage(req, res) {
         res.render('sign_up');
+    }
+
+    static async postSignup(req, res, next) {
+        try {
+            req.body.password = await bcrypt.hash(req.body.password, 10);
+            await UserAccessor.createUser(req.body);
+            res.redirect('login-page');
+        } catch (e) {
+            res.redirect('/');
+        }
     }
 }
