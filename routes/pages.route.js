@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import UserController from '../controllers/users.controller.js';
+import errorHandler from '../controllers/error.controller.js';
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.route('/css/style.css').get((req, res) => {
 
 router.route('/login-page').get(UserController.getLoginPage);
 
-router.route('/sign-up').get(UserController.getSignUpPage).post(UserController.postSignup);
+router.route('/sign-up').get(UserController.getSignUpPage)
+    .post(UserController.postSignup, errorHandler);
 
 export default router;
