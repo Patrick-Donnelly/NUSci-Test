@@ -20,7 +20,7 @@ export default class Auth {
         }
     }
 
-    static getUserInfo() {
+    static getUserInfo(req, res, next) {
         dotenv.config();
         return jwt.verify(req.cookies.token, process.env.TOKEN_KEY);
     }

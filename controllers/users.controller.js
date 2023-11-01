@@ -51,7 +51,7 @@ export default class UserController {
     static async postLogin(req, res, next) {
         try {
             if (!req.cookies.token) {
-                const user = await UserAccessor.getAllUsers(req.body.username);
+                const user = await UserAccessor.getUser(req.body.username);
                 if (user) {
                     const result = await bcrypt.compare(req.body.password, user.password);
                     if (result) {

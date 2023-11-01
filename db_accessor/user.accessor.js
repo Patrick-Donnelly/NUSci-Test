@@ -4,7 +4,7 @@ import User from '../models/user.js';
 export default class UserAccessor {
     static async getUser(username) {
         try {
-            await Connection.open('users');
+            await Connection.open('Backend');
             const user = await User.findOne({ username: username });
             return user;
         } catch (e) {
@@ -14,7 +14,7 @@ export default class UserAccessor {
     
     static async getAllUsers() {
         try {
-            await Connection.open('users');
+            await Connection.open('Backend');
         const users = [];
             for await (const doc of User.find()) {
                 users.push(doc);
@@ -27,7 +27,7 @@ export default class UserAccessor {
 
     static async createUser(userDoc) {
         try {
-            await Connection.open('users');
+            await Connection.open('Backend');
             const user = await User.create(userDoc);
             return user;
         } catch (e) {
