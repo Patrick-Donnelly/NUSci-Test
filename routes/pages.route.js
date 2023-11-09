@@ -26,4 +26,6 @@ router.route('/profile').get(Auth.authorize, UserController.getProfile, errorHan
 
 router.route('/logout').get(UserController.getLogout);
 
+router.route('/follow').post(Auth.authorize, UserController.followUser, errorHandler);
+
 export default router;

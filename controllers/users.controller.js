@@ -10,16 +10,24 @@ export default class UserController {
     }
 
     static getLoginPage(req, res) {
+        if (req.cookies.token) {
+            res.redirect('/profile');
+        } else {
         res.render('login_page', { error: req.cookies.error });
+        }
+    }
+
+    static getSignUpPage(req, res) {
+        if (req.cookies.token) {
+            res.redirect('/profile');
+        } else {
+            res.render('sign_up');
+        }
     }
 
     static getLogout(req, res) {
         res.clearCookie('token');
         res.redirect('/');
-    }
-
-    static getSignUpPage(req, res) {
-        res.render('sign_up');
     }
 
     static getProfile(req, res, next) {
@@ -84,6 +92,27 @@ export default class UserController {
         } catch (e) {
             req.error = 400;
             next();
+        }
+    }
+
+    static async followUser(req, res, next)
+    {
+        if (!req.error) {
+            const toFollow = req.body.follow;
+            const user = Auth.getUserInfo(req);
+            const username = user.username;
+            const following = user.following;
+
+            console.log(user);
+
+            //console.log(username + ", " + toFollow);
+
+            if (following.every((follower) => { follower !== toFollow; }) && toFollow != username) {
+                await UserAccessor.addFollower(username, toFollow);
+            }
+            res.redirect('/');
+        } else {
+            return next();
         }
     }
 }

@@ -34,4 +34,23 @@ export default class UserAccessor {
             throw e;
         }
     }
+
+    static async addFollower(userWhoFollowed, userToFollow) {
+        try {
+            await Connection.open('users');
+            const follower = await UserAccessor.getUser(userWhoFollowed);
+            const followed = await UserAccessor.getUser(userToFollow);
+
+            const followerList = follower.following;
+            followerList.push(userToFollow);
+            
+            const followedList = followed.followers;
+            followedList.push(userWhoFollowed);
+
+            await User.findOneAndUpdate({ username: userWhoFollowed }, {following: followerList });
+            await User.findOneAndUpdate({ username: userToFollow }, { followers: followedList });
+        } catch (e) {
+            throw e;
+        }
+    }
 }
